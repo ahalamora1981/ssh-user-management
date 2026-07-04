@@ -40,8 +40,9 @@ async def dashboard_page(request: Request):
     has_key = (keys_dir / "id_ed25519").exists()
 
     return templates.TemplateResponse(
+        request,
         "dashboard.html",
-        {"request": request, "user": user, "has_key": has_key},
+        {"user": user, "has_key": has_key},
     )
 
 
@@ -82,9 +83,9 @@ async def regenerate_key(request: Request):
     await send_private_key_email(user.email, user.username, keys["private_key_path"])
 
     return templates.TemplateResponse(
+        request,
         "dashboard.html",
         {
-            "request": request,
             "user": user,
             "has_key": True,
             "success": "New SSH key generated and sent to your email!",

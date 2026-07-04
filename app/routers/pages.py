@@ -24,7 +24,7 @@ def validate_username(username: str) -> bool:
 
 @router.get("/signup")
 async def signup_page(request: Request):
-    return templates.TemplateResponse("signup.html", {"request": request})
+    return templates.TemplateResponse(request, "signup.html")
 
 
 @router.post("/signup")
@@ -67,8 +67,9 @@ async def signup_submit(
 
     if errors:
         return templates.TemplateResponse(
+            request,
             "signup.html",
-            {"request": request, "errors": errors, "email": email, "username": username},
+            {"errors": errors, "email": email, "username": username},
         )
 
     # Create user
@@ -88,8 +89,9 @@ async def signup_submit(
     await send_verification_email(email, username, token)
 
     return templates.TemplateResponse(
+        request,
         "signup.html",
-        {"request": request, "success": "Account created! Check your email to verify."},
+        {"success": "Account created! Check your email to verify."},
     )
 
 
@@ -106,14 +108,16 @@ async def verify_email(
 
     if not user:
         return templates.TemplateResponse(
+            request,
             "verify.html",
-            {"request": request, "error": "Invalid verification link"},
+            {"error": "Invalid verification link"},
         )
 
     if user.token_expiry < datetime.utcnow():
         return templates.TemplateResponse(
+            request,
             "verify.html",
-            {"request": request, "error": "Verification link has expired"},
+            {"error": "Verification link has expired"},
         )
 
     # Activate user
@@ -130,14 +134,15 @@ async def verify_email(
     await send_private_key_email(user.email, user.username, keys["private_key_path"])
 
     return templates.TemplateResponse(
+        request,
         "verify.html",
-        {"request": request, "success": "Account verified! Your SSH key has been sent to your email."},
+        {"success": "Account verified! Your SSH key has been sent to your email."},
     )
 
 
 @router.get("/login")
 async def login_page(request: Request):
-    return templates.TemplateResponse("login.html", {"request": request})
+    return templates.TemplateResponse(request, "login.html")
 
 
 @router.post("/login")
@@ -152,14 +157,16 @@ async def login_submit(
 
     if not user or not verify_password(password, user.password_hash):
         return templates.TemplateResponse(
+            request,
             "login.html",
-            {"request": request, "error": "Invalid email or password"},
+            {"error": "Invalid email or password"},
         )
 
     if user.status != "active":
         return templates.TemplateResponse(
+            request,
             "login.html",
-            {"request": request, "error": "Account not verified. Check your email."},
+            {"error": "Account not verified. Check your email."},
         )
 
     # Create JWT token

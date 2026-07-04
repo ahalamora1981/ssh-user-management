@@ -50,8 +50,9 @@ async def admin_page(request: Request):
         users = result.scalars().all()
 
     return templates.TemplateResponse(
+        request,
         "admin.html",
-        {"request": request, "admin": admin, "users": users},
+        {"admin": admin, "users": users},
     )
 
 
