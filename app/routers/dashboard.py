@@ -1,9 +1,10 @@
-from fastapi import APIRouter, Request, Depends
+from fastapi import APIRouter, Request
 from fastapi.templating import Jinja2Templates
 from fastapi.responses import FileResponse, RedirectResponse
-from sqlalchemy.ext.asyncio import AsyncSession
-from app.database import get_db
-from app.auth import get_current_user
+from jose import JWTError, jwt
+from sqlalchemy import select
+from app.database import async_session
+from app.config import settings
 from app.models import User
 from app.ssh_service import generate_ssh_keys, get_user_keys_dir
 from app.email_service import send_private_key_email
@@ -12,11 +13,29 @@ router = APIRouter()
 templates = Jinja2Templates(directory="app/templates")
 
 
+async def get_user_from_request(request: Request):
+    token = request.cookies.get("access_token")
+    if not token:
+        return None
+    try:
+        payload = jwt.decode(token, settings.SECRET_KEY, algorithms=[settings.ALGORITHM])
+        user_id = payload.get("sub")
+        if user_id is None:
+            return None
+    except JWTError:
+        return None
+
+    async with async_session() as db:
+        result = await db.execute(select(User).where(User.id == user_id))
+        return result.scalar_one_or_none()
+
+
 @router.get("/dashboard")
-async def dashboard_page(
-    request: Request,
-    user: User = Depends(get_current_user),
-):
+async def dashboard_page(request: Request):
+    user = await get_user_from_request(request)
+    if not user:
+        return RedirectResponse(url="/login", status_code=302)
+
     keys_dir = get_user_keys_dir(user.username)
     has_key = (keys_dir / "id_ed25519").exists()
 
@@ -27,10 +46,11 @@ async def dashboard_page(
 
 
 @router.get("/dashboard/key")
-async def download_key(
-    request: Request,
-    user: User = Depends(get_current_user),
-):
+async def download_key(request: Request):
+    user = await get_user_from_request(request)
+    if not user:
+        return RedirectResponse(url="/login", status_code=302)
+
     keys_dir = get_user_keys_dir(user.username)
     private_key_path = keys_dir / "id_ed25519"
 
@@ -45,11 +65,11 @@ async def download_key(
 
 
 @router.post("/dashboard/key/regenerate")
-async def regenerate_key(
-    request: Request,
-    user: User = Depends(get_current_user),
-    db: AsyncSession = Depends(get_db),
-):
+async def regenerate_key(request: Request):
+    user = await get_user_from_request(request)
+    if not user:
+        return RedirectResponse(url="/login", status_code=302)
+
     # Generate new keys
     keys = generate_ssh_keys(user.username)
 
