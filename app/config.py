@@ -24,7 +24,7 @@ class Settings(BaseSettings):
     KEYS_DIR: str = "./keys"
 
     # Admin
-    ADMIN_EMAILS: str = "admin@example.com"
+    ADMIN_EMAILS: str = "taojundev@163.com"
 
     @property
     def admin_emails_list(self) -> List[str]:
