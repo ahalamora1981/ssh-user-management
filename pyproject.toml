@@ -33,7 +33,7 @@ dev = [
 ]
 
 [project.scripts]
-start = "run:main"
+start = "main:main"
 
 [build-system]
 requires = ["hatchling"]

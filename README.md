@@ -43,7 +43,7 @@ cp .env.example .env
 
 4. Run the application:
 ```bash
-uv run python run.py
+uv run python main.py
 ```
 
 Or with script entry point:
