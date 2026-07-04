@@ -318,6 +318,42 @@ h2 {
     padding-bottom: 0;
 }
 
+/* User List */
+.user-list {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-3);
+}
+
+.user-item {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: var(--space-3);
+    background-color: var(--neutral-cool);
+    border-radius: var(--radius-card);
+    flex-wrap: wrap;
+    gap: var(--space-2);
+}
+
+.user-info {
+    display: flex;
+    align-items: center;
+    gap: var(--space-3);
+    flex-wrap: wrap;
+}
+
+.user-email {
+    color: var(--text-black-soft);
+    font-size: 1.4rem;
+}
+
+.user-actions {
+    display: flex;
+    gap: var(--space-2);
+    flex-wrap: wrap;
+}
+
 /* Responsive */
 @media (max-width: 768px) {
     .hero h1 {
