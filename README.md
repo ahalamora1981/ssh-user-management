@@ -12,37 +12,46 @@ A web application for automating Linux server user creation with SSH key generat
 
 ## Setup
 
+### Prerequisites
+
+- Python 3.11+
+- [uv](https://github.com/astral-sh/uv) (recommended) or pip
+
+### Installation
+
 1. Clone the repository:
 ```bash
 git clone <repo-url>
 cd user-management
 ```
 
-2. Create virtual environment:
+2. Install dependencies with uv:
 ```bash
-python -m venv venv
-source venv/bin/activate  # Linux/Mac
-# or
-venv\Scripts\activate  # Windows
+uv sync
 ```
 
-3. Install dependencies:
+Or with pip:
 ```bash
 pip install -r requirements.txt
 ```
 
-4. Configure environment:
+3. Configure environment:
 ```bash
 cp .env.example .env
 # Edit .env with your settings
 ```
 
-5. Run the application:
+4. Run the application:
 ```bash
-python run.py
+uv run python run.py
 ```
 
-6. Visit `http://localhost:8000`
+Or with script entry point:
+```bash
+uv run start
+```
+
+5. Visit `http://localhost:8000`
 
 ## Configuration
 
@@ -68,6 +77,34 @@ Edit `.env` to configure:
 4. Regenerate SSH keys
 5. Delete users
 
+## Development
+
+### Adding Dependencies
+
+```bash
+# Add a dependency
+uv add package-name
+
+# Add a dev dependency
+uv add --dev package-name
+
+# Remove a dependency
+uv remove package-name
+```
+
+### Running Tests
+
+```bash
+uv run pytest
+```
+
+### Updating Dependencies
+
+```bash
+uv lock --upgrade
+uv sync
+```
+
 ## Deployment
 
 For production deployment:
@@ -87,7 +124,7 @@ After=network.target
 [Service]
 User=www-data
 WorkingDirectory=/path/to/user-management
-ExecStart=/path/to/venv/bin/uvicorn app.main:app --host 0.0.0.0 --port 8000
+ExecStart=/path/to/.venv/bin/uvicorn app.main:app --host 0.0.0.0 --port 8000
 Restart=always
 
 [Install]

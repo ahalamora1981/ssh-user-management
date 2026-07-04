@@ -1,0 +1,43 @@
+[project]
+name = "ssh-user-management"
+version = "0.1.0"
+description = "Web app for automating Linux server user creation with SSH key generation"
+readme = "README.md"
+requires-python = ">=3.11"
+license = {text = "MIT"}
+authors = [
+    {name = "Your Name", email = "your@email.com"}
+]
+
+dependencies = [
+    "fastapi>=0.109.0",
+    "uvicorn[standard]>=0.24.0",
+    "jinja2>=3.1.2",
+    "python-multipart>=0.0.6",
+    "sqlalchemy>=2.0.30",
+    "aiosqlite>=0.19.0",
+    "bcrypt>=4.1.2",
+    "passlib[bcrypt]>=1.7.4",
+    "python-jose[cryptography]>=3.3.0",
+    "paramiko>=3.4.0",
+    "aiosmtplib>=3.0.1",
+    "python-dotenv>=1.0.0",
+    "pydantic-settings>=2.1.0",
+]
+
+[project.optional-dependencies]
+dev = [
+    "pytest>=7.0.0",
+    "pytest-asyncio>=0.21.0",
+    "httpx>=0.24.0",
+]
+
+[project.scripts]
+start = "run:main"
+
+[build-system]
+requires = ["hatchling"]
+build-backend = "hatchling.build"
+
+[tool.hatch.build.targets.wheel]
+packages = ["app"]
