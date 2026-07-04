@@ -1,0 +1,298 @@
+/* Starbucks-Inspired Design System */
+:root {
+    /* Brand Colors */
+    --starbucks-green: #006241;
+    --green-accent: #00754A;
+    --house-green: #1E3932;
+    --green-uplift: #2b5148;
+    --green-light: #d4e9e2;
+
+    /* Surface Colors */
+    --white: #ffffff;
+    --neutral-warm: #f2f0eb;
+    --ceramic: #edebe9;
+    --neutral-cool: #f9f9f9;
+
+    /* Text Colors */
+    --text-black: rgba(0, 0, 0, 0.87);
+    --text-black-soft: rgba(0, 0, 0, 0.58);
+    --text-white: rgba(255, 255, 255, 1);
+    --text-white-soft: rgba(255, 255, 255, 0.70);
+
+    /* Semantic Colors */
+    --red: #c82014;
+    --gold: #cba258;
+
+    /* Typography */
+    --font-family: 'Inter', 'Helvetica Neue', Helvetica, Arial, sans-serif;
+    --letter-spacing: -0.01em;
+
+    /* Spacing */
+    --space-1: 0.4rem;
+    --space-2: 0.8rem;
+    --space-3: 1.6rem;
+    --space-4: 2.4rem;
+    --space-5: 3.2rem;
+    --space-6: 4rem;
+
+    /* Borders */
+    --radius-card: 12px;
+    --radius-button: 50px;
+
+    /* Shadows */
+    --shadow-card: 0px 0px 0.5px 0px rgba(0,0,0,0.14), 0px 1px 1px 0px rgba(0,0,0,0.24);
+    --shadow-nav: 0 1px 3px rgba(0,0,0,0.1), 0 2px 2px rgba(0,0,0,0.06), 0 0 2px rgba(0,0,0,0.07);
+}
+
+/* Reset & Base */
+*, *::before, *::after {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+html {
+    font-size: 62.5%; /* 1rem = 10px */
+}
+
+body {
+    font-family: var(--font-family);
+    font-size: 1.6rem;
+    line-height: 1.5;
+    letter-spacing: var(--letter-spacing);
+    color: var(--text-black);
+    background-color: var(--neutral-warm);
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+}
+
+/* Typography */
+h1, h2, h3 {
+    font-weight: 600;
+    letter-spacing: var(--letter-spacing);
+}
+
+h1 {
+    font-size: 2.4rem;
+    color: var(--starbucks-green);
+}
+
+h2 {
+    font-size: 2.4rem;
+    color: var(--text-black);
+    font-weight: 400;
+}
+
+/* Navbar */
+.navbar {
+    background-color: var(--house-green);
+    padding: var(--space-3) var(--space-4);
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    box-shadow: var(--shadow-nav);
+    position: sticky;
+    top: 0;
+    z-index: 100;
+}
+
+.nav-brand {
+    color: var(--text-white);
+    font-size: 1.8rem;
+    font-weight: 600;
+    letter-spacing: var(--letter-spacing);
+}
+
+.nav-links a {
+    color: var(--text-white);
+    text-decoration: none;
+    margin-left: var(--space-4);
+    font-size: 1.4rem;
+    font-weight: 600;
+    transition: opacity 0.2s ease;
+}
+
+.nav-links a:hover {
+    opacity: 0.8;
+}
+
+/* Hero */
+.hero {
+    background-color: var(--starbucks-green);
+    padding: var(--space-6) var(--space-4);
+    text-align: center;
+}
+
+.hero h1 {
+    color: var(--text-white);
+    font-size: 3.2rem;
+    margin-bottom: var(--space-2);
+}
+
+.hero p {
+    color: var(--text-white-soft);
+    font-size: 1.8rem;
+}
+
+/* Main Content */
+.main-content {
+    flex: 1;
+    padding: var(--space-6) var(--space-4);
+}
+
+.container {
+    max-width: 500px;
+    margin: 0 auto;
+}
+
+/* Cards */
+.card {
+    background-color: var(--white);
+    border-radius: var(--radius-card);
+    box-shadow: var(--shadow-card);
+    padding: var(--space-5);
+}
+
+/* Forms */
+.form-group {
+    margin-bottom: var(--space-4);
+}
+
+.form-group label {
+    display: block;
+    font-size: 1.4rem;
+    font-weight: 600;
+    color: var(--text-black);
+    margin-bottom: var(--space-2);
+}
+
+.form-group input {
+    width: 100%;
+    padding: 12px;
+    font-size: 1.6rem;
+    font-family: var(--font-family);
+    border: 1px solid var(--ceramic);
+    border-radius: 4px;
+    transition: border-color 0.2s ease;
+}
+
+.form-group input:focus {
+    outline: none;
+    border-color: var(--green-accent);
+}
+
+.form-group input.error {
+    border-color: var(--red);
+    background-color: rgba(200, 32, 20, 0.05);
+}
+
+.error-message {
+    color: var(--red);
+    font-size: 1.3rem;
+    margin-top: var(--space-1);
+}
+
+/* Buttons */
+.btn {
+    display: inline-block;
+    font-family: var(--font-family);
+    font-size: 1.6rem;
+    font-weight: 600;
+    letter-spacing: var(--letter-spacing);
+    text-decoration: none;
+    border: none;
+    border-radius: var(--radius-button);
+    padding: 12px 32px;
+    cursor: pointer;
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
+    text-align: center;
+}
+
+.btn:active {
+    transform: scale(0.95);
+}
+
+.btn-primary {
+    background-color: var(--green-accent);
+    color: var(--text-white);
+    border: 1px solid var(--green-accent);
+    width: 100%;
+}
+
+.btn-secondary {
+    background-color: transparent;
+    color: var(--green-accent);
+    border: 1px solid var(--green-accent);
+}
+
+.btn-danger {
+    background-color: var(--red);
+    color: var(--text-white);
+    border: 1px solid var(--red);
+}
+
+.btn-small {
+    padding: 8px 16px;
+    font-size: 1.4rem;
+}
+
+/* Alerts */
+.alert {
+    padding: var(--space-3);
+    border-radius: var(--radius-card);
+    margin-bottom: var(--space-4);
+    font-size: 1.4rem;
+}
+
+.alert-success {
+    background-color: var(--green-light);
+    color: var(--starbucks-green);
+    border: 1px solid var(--green-accent);
+}
+
+.alert-error {
+    background-color: rgba(200, 32, 20, 0.1);
+    color: var(--red);
+    border: 1px solid var(--red);
+}
+
+.alert-warning {
+    background-color: #fff3cd;
+    color: #856404;
+    border: 1px solid #ffc107;
+}
+
+/* Footer */
+.footer {
+    background-color: var(--house-green);
+    padding: var(--space-4);
+    text-align: center;
+    margin-top: auto;
+}
+
+.footer p {
+    color: var(--text-white-soft);
+    font-size: 1.4rem;
+}
+
+/* Utility Classes */
+.text-center { text-align: center; }
+.mt-4 { margin-top: var(--space-4); }
+.mb-4 { margin-bottom: var(--space-4); }
+.hidden { display: none; }
+
+/* Responsive */
+@media (max-width: 768px) {
+    .hero h1 {
+        font-size: 2.4rem;
+    }
+
+    .hero p {
+        font-size: 1.6rem;
+    }
+
+    .card {
+        padding: var(--space-4);
+    }
+}
