@@ -1,0 +1,47 @@
+{% extends "base.html" %}
+
+{% block title %}Dashboard - SSH User Management{% endblock %}
+
+{% block nav_links %}
+<a href="/dashboard">Dashboard</a>
+<a href="/logout">Logout</a>
+{% endblock %}
+
+{% block hero %}
+<div class="hero">
+    <h1>Welcome, {{ user.username }}</h1>
+    <p>Manage your SSH access</p>
+</div>
+{% endblock %}
+
+{% block content %}
+<div class="card">
+    {% if success %}
+    <div class="alert alert-success">{{ success }}</div>
+    {% endif %}
+
+    <div class="info-section mb-4">
+        <h2 style="margin-bottom: 1.6rem;">Account Info</h2>
+        <p><strong>Username:</strong> {{ user.username }}</p>
+        <p><strong>Email:</strong> {{ user.email }}</p>
+        <p><strong>Status:</strong>
+            <span class="badge badge-{{ user.status }}">{{ user.status }}</span>
+        </p>
+    </div>
+
+    <div class="info-section">
+        <h2 style="margin-bottom: 1.6rem;">SSH Key</h2>
+        {% if has_key %}
+        <p>Your SSH key is ready to use.</p>
+        <div style="display: flex; gap: 1rem; flex-wrap: wrap;">
+            <a href="/dashboard/key" class="btn btn-primary">Download Private Key</a>
+            <form method="POST" action="/dashboard/key/regenerate" style="display: inline;">
+                <button type="submit" class="btn btn-secondary">Regenerate Key</button>
+            </form>
+        </div>
+        {% else %}
+        <p>No SSH key found. Contact your admin.</p>
+        {% endif %}
+    </div>
+</div>
+{% endblock %}

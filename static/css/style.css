@@ -282,6 +282,42 @@ h2 {
 .mb-4 { margin-bottom: var(--space-4); }
 .hidden { display: none; }
 
+/* Badges */
+.badge {
+    display: inline-block;
+    padding: 4px 12px;
+    border-radius: 50px;
+    font-size: 1.2rem;
+    font-weight: 600;
+    text-transform: capitalize;
+}
+
+.badge-active {
+    background-color: var(--green-light);
+    color: var(--starbucks-green);
+}
+
+.badge-pending {
+    background-color: #fff3cd;
+    color: #856404;
+}
+
+.badge-inactive {
+    background-color: rgba(200, 32, 20, 0.1);
+    color: var(--red);
+}
+
+/* Info Section */
+.info-section {
+    padding-bottom: var(--space-4);
+    border-bottom: 1px solid var(--ceramic);
+}
+
+.info-section:last-child {
+    border-bottom: none;
+    padding-bottom: 0;
+}
+
 /* Responsive */
 @media (max-width: 768px) {
     .hero h1 {
