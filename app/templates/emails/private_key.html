@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <style>
+        body { font-family: 'Inter', Arial, sans-serif; background: #f2f0eb; margin: 0; padding: 40px 20px; }
+        .container { max-width: 600px; margin: 0 auto; background: #ffffff; border-radius: 12px; overflow: hidden; }
+        .header { background: #006241; padding: 32px; text-align: center; }
+        .header h1 { color: #ffffff; margin: 0; font-size: 24px; font-weight: 600; letter-spacing: -0.01em; }
+        .content { padding: 32px; }
+        .content p { color: rgba(0,0,0,0.87); line-height: 1.6; }
+        .warning { background: #fff3cd; border: 1px solid #ffc107; border-radius: 8px; padding: 16px; margin: 24px 0; }
+        .warning strong { color: #856404; }
+        .code { background: #1E3932; color: #ffffff; padding: 12px 16px; border-radius: 8px; font-family: monospace; font-size: 14px; margin: 16px 0; }
+        .footer { background: #1E3932; padding: 24px; text-align: center; color: rgba(255,255,255,0.70); font-size: 14px; }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1>Your SSH Private Key</h1>
+        </div>
+        <div class="content">
+            <p>Hi {{ username }},</p>
+            <p>Your SSH account is now active! Your private key is attached to this email.</p>
+            <div class="warning">
+                <strong>⚠️ Important:</strong> Keep this key safe and never share it. If compromised, contact your admin immediately.
+            </div>
+            <p><strong>Connection command:</strong></p>
+            <div class="code">ssh -i id_ed25519 root@{{ server_ip }}</div>
+            <p style="color: rgba(0,0,0,0.58); font-size: 14px;">You can also download your key anytime from the user portal.</p>
+        </div>
+        <div class="footer">
+            <p>SSH User Management Portal</p>
+        </div>
+    </div>
+</body>
+</html>
