@@ -15,7 +15,7 @@ class Settings(BaseSettings):
     SMTP_SERVER: str = "smtp.163.com"
     SMTP_PORT: int = 465
     SMTP_USERNAME: str = "taojundev@163.com"
-    SMTP_PASSWORD: str = "LAvnA37TqKyc5Ktm"
+    SMTP_PASSWORD: str = ""
     SENDER_EMAIL: str = "taojundev@163.com"
     SENDER_NAME: str = "SSH User Management"
 
