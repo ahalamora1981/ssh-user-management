@@ -1,0 +1,23 @@
+{% extends "base.html" %}
+
+{% block title %}Verify Email - SSH User Management{% endblock %}
+
+{% block hero %}
+<div class="hero">
+    <h1>Email Verification</h1>
+</div>
+{% endblock %}
+
+{% block content %}
+<div class="card text-center">
+    {% if success %}
+    <div class="alert alert-success">{{ success }}</div>
+    <a href="/login" class="btn btn-primary">Go to Login</a>
+    {% endif %}
+
+    {% if error %}
+    <div class="alert alert-error">{{ error }}</div>
+    <a href="/signup" class="btn btn-primary">Try Again</a>
+    {% endif %}
+</div>
+{% endblock %}
